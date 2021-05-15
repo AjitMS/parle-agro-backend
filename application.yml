@@ -1,0 +1,51 @@
+
+spring:
+  data:
+    web:
+      pageable:
+        default-page-size: 500 #Global default page size for unspecified page requests
+        max-page-size: 100
+  profiles:
+    active: dev
+    include:
+      #      - swagger
+      - fast
+  devtools:
+    restart:
+      enabled: true
+      additional-exclude: .h2.server.properties
+    livereload:
+      enabled: false # we use Webpack dev server + BrowserSync for livereload
+  jackson:
+    serialization:
+      indent-output: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:oracle:thin:@DBDEVFORRATINGS.ad.crisil.com:1821:RATINGS #jdbc:h2:file:./target/h2db/db/row;DB_CLOSE_DELAY=-1
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: R2OTRANSACTION
+    password: Row2#2021
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      maximum-pool-size: 50
+      minimum-idle: 5
+  h2:
+    console:
+      enabled: false
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    database: ORACLE
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.jdbc.batch_versioned_data: true
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
+      hibernate.jdbc.time_zone: Asia/Kolkata
